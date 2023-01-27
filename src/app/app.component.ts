@@ -14,9 +14,15 @@ export class AppComponent {
 
   newTaskName = '';
 
-  tasks: Task[] = [{taskId: 1, name: "first task"}];
+  tasks: Task[] = [{taskId: 1, name: "first task", dueDate: new Date(), category: 'Work'}];
 
-  displayedColumns: string[] = [ 'taskId','name'];
+  displayedColumns: string[] = [ 'taskId','name', 'dueDate', 'category'];
+
+  newTaskDueDate: Date = new Date();
+
+  newTaskCategory: string = '';
+
+  categories: string[] = ['Work', 'Personal', 'Shopping'];
 
   tasksDataSource = new MatTableDataSource<Task>(this.tasks);
 
@@ -33,7 +39,7 @@ export class AppComponent {
   
   addTask() {
     let id = Math.floor(Math.random() * 100000) + 1;
-    let theTask = new Task(id, this.newTaskName);
+    let theTask = new Task(id, this.newTaskName, this.newTaskDueDate, this.newTaskCategory);
     console.log(theTask);
     console.log(this.tasks);
     this.todoListAPI.addTask(theTask);
